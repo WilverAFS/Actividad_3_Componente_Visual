@@ -75,7 +75,7 @@ document.addEventListener('comprarProducto', e => console.log('comprarProducto',
 ![Vista previa Index](img/preview_catalogo.png)
 
 **Reverso de las tarjetas (detalle y botón Comprar)**  
-![Vista del reverso](img/revera_catologo.png)
+![Vista del reverso](img/reversa_catologo.png)
 
 **Consola mostrando respuesta a clics en botones**  
 ![Salida en consola de los eventos en los botones](img/botones_clic_catalogo.png)
