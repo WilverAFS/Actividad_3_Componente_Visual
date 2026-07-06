@@ -72,29 +72,19 @@ document.addEventListener('comprarProducto', e => console.log('comprarProducto',
 ## Capturas de pantalla
 
 **Vista inicial del catálogo**  
-- `img/preview_catalogo.png` — vista del componente en la página.
+![Vista previa Index](img/preview_catalogo.png)
 
 **Reverso de las tarjetas (detalle y botón Comprar)**  
-- `img/revera_catologo.png` — vista del reverso de las tarjetas.
+![Vista del reverso](img/revera_catologo.png)
 
 **Consola mostrando respuesta a clics en botones**  
-- `img/botones_clic_catalogo.png` — salida en consola de los eventos en los botones.
+![Salida en consola de los eventos en los botones](img/botones_clic_catalogo.png)
 
 ---
 
 ## Video promocional
 Accede a la presentación en:
 - [Video - Demo en OneDrive](https://1drv.ms/v/c/e80e64ce78a0815e/IQAyG7q86yVbS6DXtVLlLsWrAXvmkkwdTZ0FNyVDrLD73OQ?e=SkaaiY)
-
-**Guion (lectura ~50–60s):**
-```
-Hola, soy Wilver. Este componente de Tarjetas Dinámicas resuelve un problema común: mostrar productos con un diseño consistente y microinteracciones sin repetir código. 
-Incluye variantes (cuadrada, ancha, alta), estados visuales (nuevo, agotado, oferta) y eventos para integrar carrito o abrir detalles. 
-Para usarlo: añade los archivos CSS y JS, crea un contenedor en tu HTML y llama a crearTarjeta({...}) con contenedorId, imagen, titulo, precio, animacion, variante y estado. 
-Escucha los eventos 'favoritoToggle', 'agregarCarrito', 'expandirDetalles' y 'comprarProducto' para conectar tu lógica. 
-En pantalla verás cómo las tarjetas entran con animación, los botones animan al hacer clic y el reverso muestra el botón Comprar. 
-Descarga el repositorio, copia los archivos y pruébalo en tu proyecto. Gracias.
-```
 ---
 
 ## Estructura del repositorio 
@@ -122,5 +112,5 @@ Descarga el repositorio, copia los archivos y pruébalo en tu proyecto. Gracias.
    └─ botones_clic_catalogo.png
 ```
 ## GitHub Pages y repositorio
-- **Link al repositorio público:**
-- **Link a GitHub Pages:** 
+- **Link al repositorio público:** (https://github.com/WilverAFS/Actividad_3_Componente_Visual)
+- **Link a GitHub Pages:** (https://wilverafs.github.io/Actividad_3_Componente_Visual/)
