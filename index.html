@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Componente - Tarjetas Dinámicas</title>
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/componente.css" />
+</head>
+
+<body>
+    <main class="contenedor-presentacion">
+        <header class="cabecera">
+            <div>
+                <h1 class="titulo-principal">Componente: Tarjetas Dinámicas</h1>
+                <p class="descripcion-corta">
+                    Colección de tarjetas reutilizables con animaciones de entrada, volteo al clic,
+                    microinteracciones por botón (favorito, carrito, expandir) y reverso con descripción
+                    y botón Comprar. Personaliza colores, tamaños y comportamiento desde CSS y JS.
+                </p>
+            </div>
+        </header>
+
+        
+
+        <section id="demo" class="seccion-demo">
+            <h2>Ejemplo de insercion en tiempo real</h2>
+            <p class="descripcion-corta">
+                Utilización del componente de tarjeta dinámica mediante la función <code>crearTarjeta({...})</code>.
+            </p>
+            <p class="leyenda">
+                Tarjetas cuadradas con todas las animaciones.
+            </p>
+            <br>
+            <div class="contenedor-tarjetas" id="tarjeta">
+                <div id="t1"></div>
+                <div id="t2"></div>
+                <div id="t3"></div>
+                <div id="t4"></div>
+            </div>
+        </section>
+
+        <section class="seccion-demo">
+            <h2>Tarjeta cuadrada - animacion hacia abajo</h2>
+            <div class="contenedor-tarjetas">
+                <div id="t11"></div>
+            </div>
+        </section>
+
+        <section class="seccion-demo">
+            <h2>Tarjeta cuadrada - animacion hacia arriba</h2>
+            <div class="contenedor-tarjetas">
+                <div id="t12"></div>
+            </div>
+        </section>
+
+        <section class="seccion-demo">
+            <h2>Tarjeta ancha - animacion hacia la derecha</h2>
+            <div class="contenedor-tarjetas">
+                <div id="t13"></div>
+            </div>
+        </section>
+
+        <section class="seccion-demo">
+            <h2>Tarjeta alta - animacion hacia la izquierda</h2>
+            <div class="contenedor-tarjetas">
+                <div id="t14"></div>
+            </div>
+        </section>
+
+        <section class="seccion-demo" id="componente-demo">
+            <h2>Implementación rápida</h2>
+            <p class="descripcion-corta">
+                Este componente está pensado para integrarse en cualquier página web con tres pasos:
+            </p>
+
+            <ol class="leyenda" style="line-height:1.5;">
+                <li><strong>Incluir estilos y scripts</strong>: copia <code>css/componente.css</code> y <code>css/index.css</code> a tu proyecto y añade las etiquetas <code>&lt;link&gt;</code> en el <code>&lt;head&gt;</code>. Incluye <code>js/componente.js</code> antes de tu script que crea las tarjetas (por ejemplo <code>js/index.js</code>).</li>
+
+                <li><strong>Crear un contenedor</strong>: añade un elemento en el HTML donde quieras insertar las tarjetas, por ejemplo:
+                    <pre><code>&lt;div id="catalogo"&gt;&lt;/div&gt;</code></pre>
+                </li>
+
+                <li><strong>Generar tarjetas desde JavaScript</strong>: llama a <code>crearTarjeta({...})</code> pasando las opciones necesarias. Ejemplo mínimo:
+                    <pre><code>crearTarjeta({
+  contenedorId: "catalogo",
+  imagen: "img/producto.webp",
+  titulo: "Nombre del producto",
+  precio: "$199.00",
+  descripcion: "Descripción breve",
+  animacion: "animacion-arriba",
+  variante: "cuadrada",
+  estado: "nuevo",
+  estiloInline: "--color-fondo:#fff7f0;",
+  tilt: true
+});</code></pre>
+                </li>
+            </ol>
+
+            <p class="descripcion-corta">
+                <strong>Eventos disponibles</strong>: el componente emite eventos personalizados para integrar lógica externa:
+            </p>
+            <ul class="leyenda" style="line-height:1.5;">
+                <li><code>favoritoToggle</code> — se dispara cuando el usuario marca/desmarca favorito.</li>
+                <li><code>agregarCarrito</code> — se dispara al pulsar el botón carrito.</li>
+                <li><code>expandirDetalles</code> — se dispara al pulsar expandir (ideal para redirecciones o abrir modal).</li>
+                <li><code>comprarProducto</code> — se dispara al pulsar Comprar en el reverso.</li>
+            </ul>
+
+            <p class="descripcion-corta">
+                Ejemplo de escucha global:
+                <pre><code>document.addEventListener('agregarCarrito', e =&gt; {
+  console.log('Agregar al carrito:', e.detail.titulo);
+});</code></pre>
+            </p>
+
+            <p class="descripcion-corta">
+                <strong>Personalización</strong>: modifica las variables en <code>:root</code> dentro de <code>componente.css</code> para cambiar colores, tamaños y estados. Usa la opción <code>estiloInline</code> para aplicar variables CSS por tarjeta.
+            </p>
+        </section>
+
+    </main>
+
+    <!-- componente.js debe existir en js/componente.js -->
+    <script src="js/componente.js"></script>
+    <!-- index.js demo que pobla las secciones -->
+    <script src="js/index.js"></script>
+</body>
+
+</html>

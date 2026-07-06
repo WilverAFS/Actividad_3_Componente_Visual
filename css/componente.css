@@ -1,0 +1,323 @@
+/* css/componente.css (actualizado: correcciones urgentes) */
+
+/* Variables globales para personalización */
+/*Prueba */
+:root{
+  --color-fondo: #ffffff; 
+  --color-primario: #0b74ff;
+  --color-secundario: #1f2937;
+  --color-favorito: #e63946; 
+  --color-carrito: #2a9d8f;
+  --color-expandir: #2b6cb0;
+  --sombra-base: 0 8px 20px rgba(15,23,42,0.06);
+  --sombra-levantar: 0 18px 40px rgba(15,23,42,0.12);
+  --radio: 14px;
+  --fuente: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+  --tam-titulo: 16px;
+  --tam-texto: 14px;
+  --icon-size: 20px;
+  --gap-acciones: 10px;
+
+  /* Tamaños predefinidos */
+  --ancho-cuadrada: 280px;
+  --alto-cuadrada: 280px;
+  --ancho-ancha: 310px;
+  --alto-ancha: 240px;
+  --ancho-alta: 240px;
+  --alto-alta: 400px;
+
+  /* Borde por defecto (se puede sobrescribir por estado) */
+  --border-color: rgba(0,0,0,0.08);
+  --border-width: 1px;
+}
+
+/* Contenedor de tarjetas (demo usa index.css para layout) */
+.contenedor-tarjetas {
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+  align-items:flex-start;
+}
+
+/* Tarjeta base */
+.tarjeta {
+  /* valores por defecto; las variantes sobrescriben --ancho y --alto */
+  --ancho: var(--ancho-cuadrada);
+  --alto: var(--alto-cuadrada);
+
+  width: var(--ancho);
+  height: var(--alto);
+  perspective: 1200px;
+  position: relative;
+  border-radius: var(--radio);
+  overflow: visible;
+  background: var(--color-fondo);
+  box-shadow: var(--sombra-base);
+  transition: transform 260ms cubic-bezier(.2,.9,.3,1), box-shadow 260ms, filter 260ms, border-color 200ms;
+  transform-origin: center;
+  font-family: var(--fuente);
+  color: var(--color-secundario);
+  will-change: transform;
+  opacity: 0; /* visible con animación de entrada */
+  display: inline-block;
+  vertical-align: top;
+
+  /* borde ligero por defecto (usa variable) */
+  border: var(--border-width) solid var(--border-color);
+}
+
+/* Variantes: aseguran que --alto y --ancho estén definidos en la tarjeta */
+.tarjeta--cuadrada { --ancho: var(--ancho-cuadrada); --alto: var(--alto-cuadrada); }
+.tarjeta--ancha   { --ancho: var(--ancho-ancha);   --alto: var(--alto-ancha); }
+.tarjeta--alta    { --ancho: var(--ancho-alta);    --alto: var(--alto-alta); }
+
+/* Estados visuales (clases que se aplican a la tarjeta) */
+/* Default: borde negro suave, fondo blanco */
+.tarjeta.estado-default {
+  --border-color: rgba(0,0,0,0.2);
+  --color-fondo: #ffffff;
+}
+
+/* Nuevo: borde azul y fondo muy sutil azul */
+.tarjeta.estado-nuevo {
+  --border-color: rgba(11,116,255,0.2);
+  --color-fondo: linear-gradient(180deg, rgba(11, 117, 255, 0.074), rgba(11,116,255,0.05));
+  box-shadow: 0 10px 28px rgba(11,116,255,0.1);
+}
+
+/* Agotado: borde gris y opacidad reducida */
+.tarjeta.estado-agotado {
+  --border-color: rgba(99,102,106,0.18);
+  --color-fondo: linear-gradient(180deg, rgba(0, 0, 0, 0.146), rgba(138, 138, 138, 0.1));
+  opacity: 0.72;
+  filter: grayscale(0.18);
+  --color-primario: #656e7a;
+}
+
+/* Oferta: borde naranja/amarillo y fondo cálido (fallback sólido aplicado) */
+.tarjeta.estado-oferta {
+  --border-color-solid: #ffdc18; /* fallback sólido */
+  --color-fondo: linear-gradient(180deg, rgb(252, 234, 200), rgba(255,245,230,1));
+  box-shadow: 0 12px 36px rgba(255,122,24,0.08);
+  border: var(--border-width) solid var(--border-color-solid);
+  --color-primario: #ff0000;
+}
+
+/* Hover / expansión */
+.tarjeta:hover,
+.tarjeta:focus-within {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: var(--sombra-levantar);
+  filter: saturate(1.03);
+}
+
+/* Contenido interno */
+.tarjeta .contenido {
+  transition: transform 320ms cubic-bezier(.2,.9,.3,1), opacity 220ms;
+  transform-origin: center;
+}
+.tarjeta:hover .tarjeta-frente .contenido,
+.tarjeta:focus-within .tarjeta-frente .contenido {
+  transform: translateY(-6px) scale(1.01);
+}
+
+/* Frente y reverso */
+.tarjeta-frente,
+.tarjeta-reverso {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: var(--radio);
+  transition: transform 600ms cubic-bezier(.2,.9,.3,1), opacity 200ms;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding: 14px;
+  box-sizing: border-box;
+  background: var(--color-fondo);
+}
+
+/* Reverso */
+.tarjeta-reverso {
+  transform: rotateY(180deg);
+  background: linear-gradient(180deg, #fbfbfc, #f6f7fb);
+  text-align: center;
+  padding: 18px;
+  justify-content: center;
+}
+
+/* Volteado */
+.tarjeta.volteada .tarjeta-frente { transform: rotateY(180deg); }
+.tarjeta.volteada .tarjeta-reverso { transform: rotateY(360deg); }
+
+/* Contenedor de imagen ajustado según variante
+   Ahora usa la variable --alto definida por la variante para mantener congruencia */
+.contenedor-imagen {
+  width: 100%;
+  flex: 1; /* ocupa el espacio proporcional */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: calc(var(--radio) - 4px);
+  background: #ffffff;
+  position: relative;
+}
+
+/* Alturas relativas basadas en --alto de la tarjeta */
+.tarjeta--cuadrada .contenedor-imagen { height: calc(var(--alto) * 0.65); }
+.tarjeta--ancha   .contenedor-imagen { height: calc(var(--alto) * 0.75); }
+.tarjeta--alta    .contenedor-imagen { height: calc(var(--alto) * 0.55); }
+
+/* Imagen ajustada al tamaño de la tarjeta */
+.imagen-tarjeta {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* mostrar toda la imagen dentro del cuadro */
+  display: block;
+  transition: transform 420ms ease;
+}
+.tarjeta:hover .imagen-tarjeta,
+.tarjeta:focus-within .imagen-tarjeta {
+  transform: scale(1.05);
+}
+
+/* Metadatos */
+.contenido {
+  padding: 10px 6px 6px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  justify-content: flex-start;
+}
+.titulo-tarjeta {
+  font-size: var(--tam-titulo);
+  font-weight: 600;
+  margin: 6px 6px 0 6px;
+  text-align: center;
+  color: var(--color-secundario);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.precio-tarjeta {
+  font-size: var(--tam-texto);
+  color: var(--color-primario);
+  font-weight: 700;
+  margin: 0;
+}
+
+/* Lista vertical de acciones en esquina superior derecha */
+.acciones {
+  position: absolute;
+  top: 19px;
+  right: 19px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-acciones);
+  z-index: 40;
+  align-items: center;
+  pointer-events: none; /* por defecto no bloquea clic general */
+}
+.acciones button {
+  pointer-events: auto;
+  width: calc(var(--icon-size) + 12px);
+  height: calc(var(--icon-size) + 12px);
+  padding: 6px;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255,255,255,0.95);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+  cursor: pointer;
+  transition: transform 140ms ease, background 140ms ease, box-shadow 140ms;
+}
+.icono-favorito,
+.icono-carrito,
+.icono-expandir {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  display: block;
+  /* padding:auto eliminado (inválido) */
+}
+.acciones button:hover { transform: translateY(-4px) scale(1.06); background: #fff; box-shadow: 0 12px 26px rgba(15,23,42,0.12); }
+.acciones button:focus { outline: 2px solid rgba(11,116,255,0.12); outline-offset: 2px; }
+
+/* Reverso: descripción y comprar */
+.tarjeta-reverso h3 { margin: 0 0 8px 0; font-size: 16px; color: var(--color-secundario); }
+.tarjeta-reverso p { margin: 0 0 12px 0; color: rgba(31,41,55,0.85); font-size: 14px; line-height: 1.3; }
+.boton-comprar {
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: none;
+  background: var(--color-primario);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 120ms;
+}
+.boton-comprar:hover { transform: translateY(-3px); }
+
+/* Animaciones de entrada */
+@keyframes aparecer-arriba { from { transform: translateY(-28px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes aparecer-abajo  { from { transform: translateY(28px); opacity: 0; }  to { transform: translateY(0); opacity: 1; } }
+@keyframes aparecer-derecha{ from { transform: translateX(28px); opacity: 0; }  to { transform: translateX(0); opacity: 1; } }
+@keyframes aparecer-izquierda{ from { transform: translateX(-28px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+.animacion-arriba    { animation: aparecer-arriba 0.72s cubic-bezier(.2,.9,.3,1) forwards; }
+.animacion-abajo     { animation: aparecer-abajo  0.72s cubic-bezier(.2,.9,.3,1) forwards; }
+.animacion-derecha   { animation: aparecer-derecha 0.72s cubic-bezier(.2,.9,.3,1) forwards; }
+.animacion-izquierda { animation: aparecer-izquierda 0.72s cubic-bezier(.2,.9,.3,1) forwards; }
+
+/* --- Animaciones de clic por botón (cada una propia) --- */
+@keyframes favorito-pulse {
+  0% { transform: scale(1); filter: none; }
+  40% { transform: scale(1.28); filter: drop-shadow(0 0 8px var(--color-favorito)); }
+  70% { transform: scale(0.96); }
+  100% { transform: scale(1); filter: none; }
+}
+.animar-favorito { animation: favorito-pulse 420ms cubic-bezier(.2,.9,.3,1); }
+
+@keyframes carrito-bounce {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.22) translateY(-6px); }
+  60% { transform: scale(0.94); }
+  100% { transform: scale(1); }
+}
+.animar-carrito { animation: carrito-bounce 420ms cubic-bezier(.2,.9,.3,1); }
+
+@keyframes expandir-zoom {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.18) rotate(6deg); filter: drop-shadow(0 6px 18px rgba(43,108,176,0.12)); }
+  100% { transform: scale(1); filter: none; }
+}
+.animar-expandir { animation: expandir-zoom 420ms cubic-bezier(.2,.9,.3,1); }
+
+@keyframes comprar-glow {
+  0% { box-shadow: none; transform: scale(1); }
+  50% { box-shadow: 0 0 14px rgba(11,116,255,0.18); transform: scale(1.04); }
+  100% { box-shadow: none; transform: scale(1); }
+}
+.animar-comprar { animation: comprar-glow 480ms cubic-bezier(.2,.9,.3,1); }
+
+/* prefers-reduced-motion: respetar la preferencia del usuario */
+@media (prefers-reduced-motion: reduce) {
+  .tarjeta, .tarjeta-frente, .tarjeta-reverso, .imagen-tarjeta, .acciones button, .tarjeta .contenido {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Responsive */
+@media (max-width:420px){
+  .acciones { top: 8px; right: 8px; gap:6px; }
+  :root { --icon-size: 18px; --ancho-cuadrada: 220px; --alto-cuadrada: 300px; }
+}
+
+/* Utilidades */
+.ocultar { display: none !important; }

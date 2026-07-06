@@ -1,0 +1,90 @@
+/* css/index.css
+   Estilos de la página de demostración (separado del componente)
+*/
+:root{
+  --fondo-pagina: #f4f6fb;
+  --texto-principal: #0f1724;
+  --acento: #0b74ff;
+  --max-ancho: 970px;
+  --padding-general: 24px;
+  --card-gap: 20px;
+  --fuente-base: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:var(--fuente-base);background:var(--fondo-pagina);color:var(--texto-principal);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+
+.contenedor-presentacion{
+  max-width:var(--max-ancho);
+  margin:28px auto;
+  padding:var(--padding-general);
+}
+
+.cabecera{display:flex;gap:20px;align-items:flex-start;margin-bottom:20px}
+.titulo-principal{margin:0;font-size:28px;line-height:1.05}
+.descripcion-corta{margin:8px 0 0 0;color:rgba(15,23,36,0.75);max-width:780px}
+
+/* Secciones demo */
+.seccion-demo{
+  background:#ffffff;
+  border-radius:12px;
+  padding:18px;
+  margin-bottom:18px;
+  box-shadow:0 8px 24px rgba(15,23,42,0.04);
+}
+.seccion-demo h2{margin:0 0 8px 0;font-size:18px}
+.seccion-demo p.descripcion{margin:0 0 12px 0;color:rgba(15,23,36,0.7);font-size:14px}
+
+/* Contenedor de tarjetas dentro de cada sección */
+.contenedor-tarjetas{
+  display:flex;
+  flex-wrap:wrap;
+  gap:var(--card-gap);
+  align-items:flex-start;
+  justify-content: center;
+}
+
+/* Bloque de código visual */
+.bloque-codigo{
+  margin-top:12px;
+  background:#0f1724;
+  color:#e6eef8;
+  padding:12px;
+  border-radius:8px;
+  font-family:monospace;
+  font-size:13px;
+  overflow:auto;
+}
+
+/* Leyenda y notas */
+.leyenda{margin-top:12px;font-size:13px;color:rgba(15,23,36,0.65)}
+
+/* Responsive */
+@media (max-width:900px){
+  .cabecera{flex-direction:column;gap:8px}
+  .contenedor-presentacion{padding:16px;margin:12px}
+  .contenedor-tarjetas{justify-content:center}
+}
+
+/* Ajustes responsive para la sección de implementación */
+#componente-demo pre {
+  background: #0f1724;
+  color: #e6eef8;
+  padding: 12px;
+  border-radius: 8px;
+  font-family: monospace;
+  font-size: 13px;
+  overflow-x: auto;   /* permite scroll horizontal si el código es largo */
+  white-space: pre-wrap; /* permite que el texto se ajuste en varias líneas */
+  word-break: break-word; /* rompe palabras largas si es necesario */
+  max-width: 100%;    /* nunca exceder el ancho del contenedor */
+  box-sizing: border-box;
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 600px) {
+  #componente-demo pre {
+    font-size: 12px;   /* texto más pequeño en móviles */
+    padding: 10px;
+  }
+}
